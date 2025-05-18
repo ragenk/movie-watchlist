@@ -3,9 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <title>Movie Watchlist</title>
 </head>
 <body>
+    <header>
+        <div class="nav">
+            <h1 class="nav__logo">Find your film</h1>
+            <a class="nav__link" href="/watchlist.html">My Watchlist</a>
+        </div>
+        <div class="search-wrapper">            
+            <i class="search-icon fa-solid fa-magnifying-glass"></i>
+            <input class="search-input" type="search" name="search" id="search" placeholder="Search for a movie">
+            <button type="submit" id="search-btn" class="search-btn">Search</button>
+        </div>
+    </header>
+    <main id="main-container" class="main-container">
+        <i class="film-icon fa-solid fa-film"></i>
+        <h2 class="main-title">Start exploring</h2>
+        
+        <div class="movie-wrapper">
+            <div class="movie__poster">
+            </div>
+            <div class="movie">
+                <div class="movie__title">                
+                    <h3>Blade Runner</h3>
+                    <p><i class="fa-solid fa-star movie__rating"></i> 8.1</p>
+                </div>
+                <div class="movie__details">
+                    <p>117 min</p>
+                    <p>Action, Drama, Sci-Fi</p>
+                    <a href="#"><i class="fa-solid fa-circle-plus"></i></i> Watchlist</a>
+                </div>
+                <div class="movie__synopsis">                
+                    <p>A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.</p>
+                </div>
+            </div>
+        </div> 
+        <div class="separator">            
+            <hr>
+        </div>
+    </main>   
     <script src="script.js" type="module"></script>
 </body>
 </html>
