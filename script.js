@@ -1,6 +1,8 @@
 const searchInput = document.getElementById("search");
 const searchBtn = document.getElementById("search-btn");
 const mainEl = document.getElementById("main-container");
+let watchlist = [];
+let moviesByIds;
 
 searchBtn.addEventListener("click", async () => {
   mainEl.innerHTML = "";
@@ -18,10 +20,35 @@ searchBtn.addEventListener("click", async () => {
     return data;
   });
 
-  const moviesByIds = await Promise.all(fetchPromises);
-
+  moviesByIds = await Promise.all(fetchPromises);
   renderHtml(moviesByIds);
 });
+
+document.addEventListener("click", (e) => {
+  if (e.target.dataset.imdbid) {
+    addToWatchlist(e.target.dataset.imdbid);
+    localStorage.setItem("moviesWatchlist", JSON.stringify(watchlist));
+  }
+});
+
+function addToWatchlist(id) {
+  const movieObj = moviesByIds.filter((movie) => {
+    return movie.imdbID === id;
+  })[0];
+  const index = watchlist.indexOf(movieObj);
+
+  if (!watchlist.includes(movieObj)) {
+    watchlist.push(movieObj);
+    document
+      .getElementById(`add-btn-${id}`)
+      .classList.replace("fa-circle-plus", "fa-circle-minus");
+  } else {
+    watchlist.splice(index, 1);
+    document
+      .getElementById(`add-btn-${id}`)
+      .classList.replace("fa-circle-minus", "fa-circle-plus");
+  }
+}
 
 function renderHtml(arr) {
   for (const movie of arr) {
@@ -39,7 +66,7 @@ function renderHtml(arr) {
                   <div class="movie__details">
                       <p>${movie.Runtime}</p>
                       <p>${movie.Genre}</p>
-                      <a href="#"><i class="fa-solid fa-circle-plus"></i></i> Watchlist</a>
+                      <button class="add-btn" data-imdbid="${movie.imdbID}"><i class="fa-solid fa-circle-plus" id="add-btn-${movie.imdbID}"></i> Watchlist</button>
                   </div>
                   <div class="movie__synopsis">
                       <p>${movie.Plot}</p>

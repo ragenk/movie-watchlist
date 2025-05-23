@@ -161,8 +161,14 @@ hr {
     font-size: 0.9em;
 }
 
-.movie__details a {    
+.add-btn {
+    margin-left: auto;
     color: #111827;
+    border: none;
+    background-color: #fff;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .movie__synopsis {
