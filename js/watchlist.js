@@ -4,18 +4,17 @@ const mainEl = document.getElementById("main-container");
 getHtml(retreiveWatchlist);
 
 function getHtml(arr) {
-  if (retreiveWatchlist.length == 0) {
+  if (!retreiveWatchlist || retreiveWatchlist.length == 0) {
     mainEl.innerHTML = `    
         <h2 class="main-title">Your watchlist is looking a little empty...</h2>
         <p class="sub-title"><a href="/index.html"><i class="fa-solid fa-circle-plus"></i> Let's add some movies!</a></p>
     `;
     mainEl.style.justifyContent = "center";
   } else {
-    mainEl.innerHTML = "";
+    let moviesHtml = "";
     mainEl.style.justifyContent = "start";
     for (const movie of arr) {
-      let moviesHtml = "";
-      moviesHtml = `
+      moviesHtml += `
           <div class="movie-wrapper">
               <div class="movie__poster">
                   <img src="${movie.Poster}">
@@ -39,15 +38,14 @@ function getHtml(arr) {
               <hr>
           </div>
           `;
-      mainEl.innerHTML += moviesHtml;
     }
+    mainEl.innerHTML = moviesHtml;
   }
 }
 
 document.addEventListener("click", (e) => {
   if (e.target.dataset.imdbid) {
     removeFromWatchlist(e.target.dataset.imdbid);
-    localStorage.setItem("moviesWatchlist", JSON.stringify(retreiveWatchlist));
     getHtml(retreiveWatchlist);
   }
 });
@@ -62,4 +60,6 @@ function removeFromWatchlist(id) {
   if (retreiveWatchlist.includes(movieObj)) {
     retreiveWatchlist.splice(index, 1);
   }
+
+  localStorage.setItem("moviesWatchlist", JSON.stringify(retreiveWatchlist));
 }
