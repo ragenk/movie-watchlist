@@ -16,7 +16,7 @@ searchBtn.addEventListener("click", performSearch);
 async function performSearch() {
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=f3f350ca&s=${searchInput.value}`
+      `https://www.omdbapi.com/?apikey=f3f350ca&s=${searchInput.value}`
     );
 
     const data = await response.json();
@@ -24,7 +24,7 @@ async function performSearch() {
     if (data.Response == "True" && Array.isArray(data.Search)) {
       const fetchPromises = data.Search.map(async (id) => {
         const response = await fetch(
-          `http://www.omdbapi.com/?apikey=f3f350ca&i=${id.imdbID}`
+          `https://www.omdbapi.com/?apikey=f3f350ca&i=${id.imdbID}`
         );
         const data = await response.json();
         return data;
